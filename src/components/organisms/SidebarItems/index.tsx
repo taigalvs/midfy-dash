@@ -24,7 +24,7 @@ export default function SidebarItems() {
           </ListItemIcon>
           <ListItemText primary='Dashboard' />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate('/orders')}>
+        <ListItemButton disabled onClick={() => navigate('/orders')}>
           <ListItemIcon>
             <ShoppingCartIcon />
           </ListItemIcon>
@@ -36,13 +36,13 @@ export default function SidebarItems() {
           </ListItemIcon>
           <ListItemText primary='Customers' />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate('/reports')}>
+        <ListItemButton disabled onClick={() => navigate('/reports')}>
           <ListItemIcon>
             <BarChartIcon />
           </ListItemIcon>
           <ListItemText primary='Reports' />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate('/integrations')}>
+        <ListItemButton disabled onClick={() => navigate('/integrations')}>
           <ListItemIcon>
             <LayersIcon />
           </ListItemIcon>
@@ -54,19 +54,19 @@ export default function SidebarItems() {
         <ListSubheader component='div' inset>
           Saved reports
         </ListSubheader>
-        <ListItemButton onClick={() => navigate('/current-month')}>
+        <ListItemButton disabled onClick={() => navigate('/current-month')}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
           <ListItemText primary='Current month' />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate('/last-quarter')}>
+        <ListItemButton disabled onClick={() => navigate('/last-quarter')}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
           <ListItemText primary='Last quarter' />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate('/year-end-sale')}>
+        <ListItemButton disabled onClick={() => navigate('/year-end-sale')}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
