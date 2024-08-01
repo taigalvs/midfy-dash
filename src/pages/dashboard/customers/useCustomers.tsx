@@ -1,18 +1,32 @@
-import { TCustomerItem, useEditCustomerMutation, useGetCustomersList } from '@/integration/resources/customers'
-import { Button } from '@mui/material'
+import {
+  TCustomerItem,
+  useEditCustomerMutation,
+  useGetCustomersList,
+  useDeleteCustomerMutation
+} from '@/integration/resources/customers'
+import { Avatar, IconButton } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid'
-import { useMemo, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 
 export const useCustomers = () => {
   const { data: customers, isLoading, isRefetching } = useGetCustomersList()
   const editCustomerMutation = useEditCustomerMutation()
+  const deleteCustomerMutation = useDeleteCustomerMutation()
 
   const [open, setOpen] = useState(false)
   const [selectedCustomer, setSelectedCustomer] = useState<TCustomerItem>()
+  const [imagePreview, setImagePreview] = useState(selectedCustomer?.avatar || '')
 
   const handleEditClick = (customer: TCustomerItem) => {
     setSelectedCustomer(customer)
+    setImagePreview(customer.avatar)
     setOpen(true)
+  }
+
+  const handleDeleteClick = (customerId: string) => {
+    deleteCustomerMutation.mutate(customerId)
   }
 
   const handleClose = () => {
@@ -21,9 +35,21 @@ export const useCustomers = () => {
   }
 
   const handleSave = (values: TCustomerItem) => {
-    return editCustomerMutation.mutateAsync({ id: values.id, name: values.name }).finally(() => {
+    return editCustomerMutation.mutateAsync(values).finally(() => {
       handleClose()
     })
+  }
+
+  const handleAvatarChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: string) => void
+  ) => {
+    const file = e.currentTarget.files?.[0]
+    if (file) {
+      const urlFile = URL.createObjectURL(file)
+      setImagePreview(urlFile)
+      setFieldValue('avatar', urlFile)
+    }
   }
 
   const columns: GridColDef<TCustomerItem>[] = useMemo(
@@ -32,10 +58,10 @@ export const useCustomers = () => {
       { field: 'name', headerName: 'Name', width: 150 },
       {
         field: 'avatar',
-        headerName: 'Avatar',
-        width: 110,
+        headerName: 'Profile Picture',
+        width: 120,
         renderCell: (params: GridRenderCellParams<TCustomerItem, string>) => (
-          <img src={params.value} alt='avatar' style={{ width: 50, height: 50, borderRadius: '50%' }} />
+          <Avatar src={params.value} sx={{ width: 40, height: 40, borderRadius: '50%' }} />
         ),
         filterable: false,
         sortable: false
@@ -54,9 +80,14 @@ export const useCustomers = () => {
         headerName: 'Actions',
         width: 150,
         renderCell: (params: GridRenderCellParams<TCustomerItem>) => (
-          <Button variant='contained' color='primary' onClick={() => handleEditClick(params.row)}>
-            Edit
-          </Button>
+          <>
+            <IconButton color='primary' onClick={() => handleEditClick(params.row)}>
+              <EditIcon fontSize='small' />
+            </IconButton>
+            <IconButton color='error' onClick={() => handleDeleteClick(params.row.id)}>
+              <DeleteIcon fontSize='small' />
+            </IconButton>
+          </>
         ),
         filterable: false,
         sortable: false
@@ -69,12 +100,15 @@ export const useCustomers = () => {
     customers,
     columns,
     handleEditClick,
+    handleDeleteClick,
     handleSave,
     open,
     selectedCustomer,
     setOpen,
     setSelectedCustomer,
     handleClose,
-    isLoading: isLoading || isRefetching
+    isLoading: isLoading || isRefetching,
+    imagePreview,
+    handleAvatarChange
   }
 }

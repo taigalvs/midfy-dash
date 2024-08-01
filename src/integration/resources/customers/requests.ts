@@ -1,5 +1,4 @@
 import { client } from '@/integration/client'
-
 import { TCustomerItem, TCustomerPayload } from './types'
 
 export const getCustomersList = async () => {
@@ -8,4 +7,8 @@ export const getCustomersList = async () => {
 
 export const editCustomer = async (data: TCustomerPayload) => {
   return client.put(`/customers/${data.id}`, data).then(({ data }) => data)
+}
+
+export const deleteCustomer = async (id: string) => {
+  return client.delete(`/customers/${id}`).then(({ data }) => data)
 }

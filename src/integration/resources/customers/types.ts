@@ -8,4 +8,5 @@ export type TCustomerItem = {
 export type TCustomerPayload = {
   id: string
   name: string
+  avatar: string
 }
