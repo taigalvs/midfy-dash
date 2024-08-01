@@ -15,7 +15,8 @@ import {
   IconButton,
   Box,
   FormControl,
-  FormLabel
+  FormLabel,
+  DialogContentText
 } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
 import { Formik, Form, Field, FieldProps } from 'formik'
@@ -36,7 +37,9 @@ export const CustomersUI = ({
   handleClose,
   isLoading,
   imagePreview,
-  handleAvatarChange
+  handleAvatarChange,
+  confirmDeleteOpen,
+  handleConfirmDelete
 }: ReturnType<typeof useCustomers>) => {
   return (
     <Grid container spacing={2} justifyContent='center'>
@@ -108,6 +111,27 @@ export const CustomersUI = ({
             )}
           </Formik>
         </DialogContent>
+      </Dialog>
+      <Dialog
+        open={confirmDeleteOpen}
+        onClose={handleClose}
+        TransitionComponent={Slide}
+        transitionDuration={500}
+        maxWidth='xs'
+        fullWidth
+      >
+        <DialogTitle fontWeight={600}>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Are you sure you want to delete this customer?</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color='primary' variant='outlined'>
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmDelete} color='primary' variant='contained'>
+            Confirm
+          </Button>
+        </DialogActions>
       </Dialog>
     </Grid>
   )

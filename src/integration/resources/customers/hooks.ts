@@ -16,11 +16,11 @@ export const useEditCustomerMutation = () => {
   return useMutation({
     mutationFn: requests.editCustomer,
     onSuccess: () => {
-      toast.success('Alteração realizada com sucesso.')
+      toast.success('Customer edited successfully.')
       queryClient.invalidateQueries({ queryKey: [KEY_GET_CUSTOMERS_LIST] })
     },
     onError: () => {
-      toast.error(`Ocorreu um erro ao tentar alterar os dados do cliente.`)
+      toast.error(`An error occurred while trying to edit the customer.`)
     }
   })
 }
@@ -30,11 +30,11 @@ export const useDeleteCustomerMutation = () => {
   return useMutation({
     mutationFn: requests.deleteCustomer,
     onSuccess: () => {
-      toast.success('Cliente excluído com sucesso.')
+      toast.success('Client deleted successfully.')
       queryClient.invalidateQueries({ queryKey: [KEY_GET_CUSTOMERS_LIST] })
     },
     onError: () => {
-      toast.error(`Ocorreu um erro ao tentar excluir o cliente.`)
+      toast.error(`An error occurred while trying to delete the customer.`)
     }
   })
 }

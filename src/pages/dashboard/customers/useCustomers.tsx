@@ -18,6 +18,7 @@ export const useCustomers = () => {
   const [open, setOpen] = useState(false)
   const [selectedCustomer, setSelectedCustomer] = useState<TCustomerItem>()
   const [imagePreview, setImagePreview] = useState(selectedCustomer?.avatar || '')
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false)
 
   const handleEditClick = (customer: TCustomerItem) => {
     setSelectedCustomer(customer)
@@ -25,12 +26,20 @@ export const useCustomers = () => {
     setOpen(true)
   }
 
-  const handleDeleteClick = (customerId: string) => {
-    deleteCustomerMutation.mutate(customerId)
+  const handleDeleteClick = (customer: TCustomerItem) => {
+    setSelectedCustomer(customer)
+    setConfirmDeleteOpen(true)
+  }
+
+  const handleConfirmDelete = () => {
+    deleteCustomerMutation.mutate(selectedCustomer?.id || '')
+    setConfirmDeleteOpen(false)
+    setSelectedCustomer(undefined)
   }
 
   const handleClose = () => {
     setOpen(false)
+    setConfirmDeleteOpen(false)
     setSelectedCustomer(undefined)
   }
 
@@ -71,9 +80,7 @@ export const useCustomers = () => {
         headerName: 'Created At',
         type: 'date',
         width: 150,
-        valueGetter: (_, row) => new Date(row.createdAt),
-        filterable: false,
-        sortable: false
+        valueGetter: (_, row) => new Date(row.createdAt)
       },
       {
         field: 'actions',
@@ -84,7 +91,7 @@ export const useCustomers = () => {
             <IconButton color='primary' onClick={() => handleEditClick(params.row)}>
               <EditIcon fontSize='small' />
             </IconButton>
-            <IconButton color='error' onClick={() => handleDeleteClick(params.row.id)}>
+            <IconButton color='error' onClick={() => handleDeleteClick(params.row)}>
               <DeleteIcon fontSize='small' />
             </IconButton>
           </>
@@ -109,6 +116,8 @@ export const useCustomers = () => {
     handleClose,
     isLoading: isLoading || isRefetching,
     imagePreview,
-    handleAvatarChange
+    handleAvatarChange,
+    confirmDeleteOpen,
+    handleConfirmDelete
   }
 }
