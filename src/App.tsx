@@ -1,7 +1,11 @@
+import { CssBaseline } from '@mui/material'
+import { Routes } from './Routes'
+
 function App() {
   return (
     <>
-      <p>Initial structure</p>
+      <CssBaseline />
+      <Routes />
     </>
   )
 }
