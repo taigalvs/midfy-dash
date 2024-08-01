@@ -72,7 +72,7 @@ export const Layout = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
       <CssBaseline />
       <AppBar position='absolute' open={open}>
         <Toolbar
@@ -127,11 +127,13 @@ export const Layout = () => {
             theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
-          overflow: 'auto'
+          overflow: 'auto',
+          marginTop: '24px',
+          width: '100%'
         }}
       >
         <Toolbar />
-        <Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
+        <Container maxWidth='lg' sx={{ mb: 4, px: 2, width: '100%' }}>
           <Outlet />
         </Container>
       </Box>
