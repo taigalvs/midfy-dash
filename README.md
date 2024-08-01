@@ -49,22 +49,42 @@ yarn dev
 ### Folder Structure
 
 ```
-    .
-    ├── public
-    │ ├── index.html
-    │ └── ...
-    ├── src
-    │ ├── components
-    │ ├── pages
-    │ ├── styles
-    │ │ ├── theme.ts # Theme settings for MUI and Emotion
-    │ │ └── index.css   # Global styles
-    │ ├── App.tsx
-    │ ├── main.tsx
-    │ ├── Routes.tsx
-    │ ├── styles
-    │ │ ├── theme.ts # Theme settings for MUI and Emotion
-    │ │ └── index.css   # Global styles
-    │ └── vite.config.ts
-    └── package.json
+├── src
+│ ├── integration
+│ │ ├── client.ts # Axios client configuration
+│ │ ├── resources # Integration resources
+│ │ ├── customers
+│ │ │ ├── hooks.ts # Customers List hooks
+│ │ │ ├── requests.ts # Customers List requests
+│ │ │ └── types.ts # Customers List types
+│ ├── pages
+│ │ ├── Layout.tsx # Layout component
+│ │ └── ...
+│ ├── components # Atomic Design components
+│ │ ├── atoms
+│ │ ├── organisms
+│ │ └── ...
+│ ├── pages # Pages
+│ │ ├── Layout.tsx # Layout component
+│ │ ├── dashboard
+│ │ │ ├── customers
+│ │ │ │ ├── CustomersUI.tsx # Customers List UI
+│ │ │ │ ├── useCustomers.tsx # Customers List hooks
+│ │ │ │ └── index.tsx # Customers List page
+│ │ │ └── index.tsx # Dashboard page
+│ │ └── ...
+│ ├── components # Atomic Design components
+│ │ ├── atoms
+│ │ ├── molecules
+│ │ ├── organisms
+│ ├── styles
+│ │ ├── theme.ts # Theme settings for MUI and Emotion
+│ │ ├── index.css # Global CSS styles
+│ │ └── ...
+│ ├── App.tsx # Main App component
+│ ├── main.tsx # Application entry point
+│ ├── query-client.ts # React Query client configuration
+│ └── ...
+├── package.json
+└── ...
 ```
