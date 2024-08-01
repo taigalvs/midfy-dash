@@ -4,3 +4,8 @@ export type TCustomerItem = {
   avatar: string
   createdAt: string
 }
+
+export type TCustomerPayload = {
+  id: string
+  name: string
+}

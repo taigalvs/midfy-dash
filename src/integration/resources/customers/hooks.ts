@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import * as requests from './requests'
 import { toast } from 'react-toastify'
 
@@ -7,7 +7,8 @@ export const KEY_GET_CUSTOMERS_LIST = 'getCustomersList'
 export const useGetCustomersList = () =>
   useQuery({
     queryKey: [KEY_GET_CUSTOMERS_LIST],
-    queryFn: () => requests.getCustomersList()
+    queryFn: () => requests.getCustomersList(),
+    placeholderData: keepPreviousData
   })
 
 export const useEditCustomerMutation = () => {
@@ -19,7 +20,7 @@ export const useEditCustomerMutation = () => {
       queryClient.invalidateQueries({ queryKey: [KEY_GET_CUSTOMERS_LIST] })
     },
     onError: () => {
-      toast.error(`Ocorreu um erro ao tentar alterar o cliente.`)
+      toast.error(`Ocorreu um erro ao tentar alterar os dados do cliente.`)
     }
   })
 }

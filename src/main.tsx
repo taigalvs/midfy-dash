@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css'
 import { createTheme } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
 import { ToastContainer } from 'react-toastify'
@@ -14,8 +15,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <App />
-        <ToastContainer />
       </ThemeProvider>
+      <ToastContainer position='top-right' closeOnClick pauseOnFocusLoss draggable theme='colored' pauseOnHover />
     </QueryClientProvider>
   </React.StrictMode>
 )
