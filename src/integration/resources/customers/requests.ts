@@ -7,5 +7,5 @@ export const getCustomersList = async () => {
 }
 
 export const editCustomer = async (data: { id: string; name: string }) => {
-  return client.post(`/customers/${data.id}`, data).then(({ data }) => data)
+  return client.put(`/customers/${data.id}`, data).then(({ data }) => data)
 }
