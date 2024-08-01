@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { DashboardHome } from '@/pages/dashboard'
 import { Layout } from './pages/Layout'
+import { CustomersPage } from './pages/dashboard/customers'
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: DashboardHome
+      },
+      {
+        path: '/customers',
+        Component: CustomersPage
       }
     ]
   }
