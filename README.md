@@ -46,23 +46,25 @@ yarn dev
 - Axios
 - Recharts
 
-Folder Structure
-Copy
-.
-├── public
-│ ├── index.html
-│ └── ...
-├── src
-│ ├── components
-│ ├── pages
-│ ├── styles
-│ │ ├── theme.ts # Theme settings for MUI and Emotion
-│ │ ├── index.css # Global CSS styles
-│ │ └── ...
-│ ├── utils
-│ ├── App.tsx # Main App component
-│ ├── main.tsx # Application entry point
-│ ├── query-client.ts # React Query client configuration
-│ └── ...
-├── package.json
-└── ...
+### Folder Structure
+
+```
+    .
+    ├── public
+    │ ├── index.html
+    │ └── ...
+    ├── src
+    │ ├── components
+    │ ├── pages
+    │ ├── styles
+    │ │ ├── theme.ts # Theme settings for MUI and Emotion
+    │ │ └── index.css   # Global styles
+    │ ├── App.tsx
+    │ ├── main.tsx
+    │ ├── Routes.tsx
+    │ ├── styles
+    │ │ ├── theme.ts # Theme settings for MUI and Emotion
+    │ │ └── index.css   # Global styles
+    │ └── vite.config.ts
+    └── package.json
+```
